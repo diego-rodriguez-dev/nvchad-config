@@ -1,1 +1,2 @@
-print("init.lua from diego")
+require "custom.sets"
+require "custom.remaps"

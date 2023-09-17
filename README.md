@@ -2,4 +2,5 @@
 
 Author: Diego Rodriguez
 
-Neovim Version:
+Neovim Version: v0.9.2
+
