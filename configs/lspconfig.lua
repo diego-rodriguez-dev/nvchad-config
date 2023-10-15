@@ -2,13 +2,24 @@ local config = require "plugins.configs.lspconfig"
 
 local on_attach = config.on_attach
 local capabilities = config.capabilities
-
+local util = require "lspconfig.util"
 local lspconfig = require "lspconfig"
 
 lspconfig.pyright.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   fileTypes = { "python" },
+  settings = {
+    python = {
+      analysis = {
+        autoImportCompletions = true,
+        autoSearchPaths = true,
+        diagnosticMode = "workspace", -- openFilesOnly, workspace
+        typeCheckingMode = "strict", -- off, basic, strict
+        useLibraryCodeForTypes = true,
+      },
+    },
+  },
 }
 
 local function organize_imports()
@@ -46,12 +57,34 @@ end
 -- capabilities = capabilities,
 -- }
 
+local default_node_modules = vim.fn.getcwd() .. "/node_modules"
+
+local ngls_cmd = {
+  "ngserver",
+  "--stdio",
+  "--tsProbeLocations",
+  default_node_modules,
+  "--ngProbeLocations",
+  default_node_modules,
+  "--experimental-ivy",
+}
+
+lspconfig.angularls.setup {
+  -- cmd = ngls_cmd,
+  -- on_new_config = function(new_config)
+  --   new_config.cmd = ngls_cmd
+  -- end,
+  on_attach = on_attach,
+  capabilities = capabilities,
+  root_dir = util.root_pattern("angular.json", "package.json"),
+}
+
 lspconfig.tsserver.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   init_options = {
     preferences = {
-      disableSuggestions = true,
+      disableSuggestions = false,
     },
   },
   command = {
@@ -60,6 +93,7 @@ lspconfig.tsserver.setup {
       description = "Organize Imports",
     },
   },
+  root_dir = util.root_pattern("package.json", "tsconfig.json", "tsconfig.base.json", "jsconfig.json", ".git"),
 }
 
 lspconfig.jsonls.setup {
@@ -79,10 +113,10 @@ lspconfig.cssls.setup {
   capabilities = capabilities,
 }
 
-lspconfig.html.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+-- lspconfig.html.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+-- }
 
 lspconfig.lua_ls.setup {
   on_attach = on_attach,

@@ -21,6 +21,16 @@ local plugins = {
   },
   {
     event = "VeryLazy",
+    "Equilibris/nx.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+      require("nx").setup {}
+    end,
+  },
+  {
+    event = "VeryLazy",
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
@@ -51,7 +61,7 @@ local plugins = {
         "terraform-ls",
         "stylua",
         "docker-compose-language-service",
-                "dockerfile-language-server"
+        "dockerfile-language-server",
       },
     },
   },
