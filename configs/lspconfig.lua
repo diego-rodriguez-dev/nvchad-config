@@ -14,14 +14,15 @@ lspconfig.pyright.setup {
       analysis = {
         autoImportCompletions = true,
         autoSearchPaths = true,
-        diagnosticMode = "workspace", -- openFilesOnly, workspace
+        diagnosticMode = "openFilesOnly", -- openFilesOnly, workspace
         typeCheckingMode = "strict", -- off, basic, strict
         useLibraryCodeForTypes = true,
+        extraPaths = { "/home/qxz0myb/work/d3apps/cloud-svcs/idun/" },
       },
     },
   },
 }
-
+-- require("lspconfig").jedi_language_server.setup {}
 local function organize_imports()
   local params = {
     command = "_typescript.organizeImports",
@@ -29,11 +30,12 @@ local function organize_imports()
   }
   vim.lsp.buf.execute_command(params)
 end
+
 -- lspconfig.pylsp.setup {
--- on_attach = on_attach,
--- settings = {
+--   on_attach = on_attach,
+--   settings = {
 --     pylsp = {
---     plugins = {
+--       plugins = {
 --         -- formatter options
 --         black = { enabled = true },
 --         autopep8 = { enabled = false },
@@ -48,13 +50,13 @@ end
 --         jedi_completion = { fuzzy = true },
 --         -- import sorting
 --         pyls_isort = { enabled = true },
+--       },
 --     },
---     },
--- },
--- flags = {
+--   },
+--   flags = {
 --     debounce_text_changes = 200,
--- },
--- capabilities = capabilities,
+--   },
+--   capabilities = capabilities,
 -- }
 
 local default_node_modules = vim.fn.getcwd() .. "/node_modules"
@@ -69,14 +71,9 @@ local ngls_cmd = {
   "--experimental-ivy",
 }
 
-lspconfig.angularls.setup {
-  -- cmd = ngls_cmd,
-  -- on_new_config = function(new_config)
-  --   new_config.cmd = ngls_cmd
-  -- end,
+lspconfig.eslint.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  root_dir = util.root_pattern("angular.json", "package.json"),
 }
 
 lspconfig.tsserver.setup {
@@ -93,13 +90,23 @@ lspconfig.tsserver.setup {
       description = "Organize Imports",
     },
   },
-  root_dir = util.root_pattern("package.json", "tsconfig.json", "tsconfig.base.json", "jsconfig.json", ".git"),
+  -- root_dir = util.root_pattern("package.json", "tsconfig.json", "tsconfig.base.json", "jsconfig.json", ".git"),
 }
 
 lspconfig.jsonls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
+
+-- lspconfig.angularls.setup {
+--   -- cmd = ngls_cmd,
+--   -- on_new_config = function(new_config)
+--   --   new_config.cmd = ngls_cmd
+--   -- end,
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   root_dir = util.root_pattern("angular.json", "package.json"),
+-- }
 
 lspconfig.terraformls.setup {
   on_attach = on_attach,
