@@ -3,7 +3,7 @@ local M = {}
 
 
 M.ui = {
-  theme = 'onenord' ,
+  theme = 'nord' ,
   transparency =  true,
   tabufline = {
     enabled = false
