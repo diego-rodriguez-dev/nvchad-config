@@ -3,4 +3,3 @@
 Author: Diego Rodriguez
 
 Neovim Version: v0.9.2
-

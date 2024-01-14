@@ -31,34 +31,6 @@ local function organize_imports()
   vim.lsp.buf.execute_command(params)
 end
 
--- lspconfig.pylsp.setup {
---   on_attach = on_attach,
---   settings = {
---     pylsp = {
---       plugins = {
---         -- formatter options
---         black = { enabled = true },
---         autopep8 = { enabled = false },
---         yapf = { enabled = false },
---         -- linter options
---         pylint = { enabled = true, executable = "pylint" },
---         pyflakes = { enabled = false },
---         pycodestyle = { enabled = false },
---         -- type checker
---         pylsp_mypy = { enabled = true },
---         -- auto-completion options
---         jedi_completion = { fuzzy = true },
---         -- import sorting
---         pyls_isort = { enabled = true },
---       },
---     },
---   },
---   flags = {
---     debounce_text_changes = 200,
---   },
---   capabilities = capabilities,
--- }
-
 local default_node_modules = vim.fn.getcwd() .. "/node_modules"
 
 local ngls_cmd = {
@@ -120,11 +92,6 @@ lspconfig.cssls.setup {
   capabilities = capabilities,
 }
 
--- lspconfig.html.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
--- }
-
 lspconfig.lua_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -141,6 +108,11 @@ lspconfig.dockerls.setup {
 }
 
 lspconfig.docker_compose_language_service.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+lspconfig.bashls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }

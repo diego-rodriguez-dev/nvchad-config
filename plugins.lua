@@ -1,5 +1,40 @@
 local plugins = {
   {
+    "christoomey/vim-tmux-navigator",
+    event = "VeryLazy",
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function()
+      opts = require "plugins.configs.treesitter"
+      opts.ensure_installed = {
+        "lua",
+        "javascript",
+        "typescript",
+        "html",
+        "python",
+      }
+    end,
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    event = "VeryLazy",
+    opts = function()
+      return require "custom.configs.null-ls"
+    end,
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    ft = {
+      "javascript",
+      "typescript",
+      "html",
+    },
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+  {
     event = "VeryLazy",
     "ThePrimeagen/harpoon",
     dependencies = {
@@ -43,12 +78,11 @@ local plugins = {
     opts = {
       ensure_installed = {
         "eslint-lsp",
-        "prettier",
+        "prettierd",
         "typescript-language-server",
         "js-debug-adapter",
         "lua-language-server",
         "pyright",
-        "python-lsp-server",
         "isort",
         "css-lsp",
         "json-lsp",
@@ -62,6 +96,10 @@ local plugins = {
         "stylua",
         "docker-compose-language-service",
         "dockerfile-language-server",
+        "bash-language-server",
+        "markdownlint",
+        "actionlint",
+        "hadolint",
       },
     },
   },
@@ -83,13 +121,6 @@ local plugins = {
     "mfussenegger/nvim-lint",
     opts = function()
       require "custom.configs.lint"
-    end,
-  },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    ft = { "python" },
-    opts = function()
-      return require "custom.configs.null-ls"
     end,
   },
 }

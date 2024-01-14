@@ -24,6 +24,7 @@ vim.keymap.set("n", "<leader>fo", vim.lsp.buf.format)
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>chmod", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>t", "<cmd>TroubleToggle<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader><leader>", function()
   vim.cmd "so"

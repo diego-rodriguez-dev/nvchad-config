@@ -1,19 +1,26 @@
 ---@type ChadrcConfig
 local M = {}
 
-
 M.ui = {
-  theme = 'nord' ,
-  transparency =  true,
+  theme = "catppuccin",
+  transparency = true,
   tabufline = {
-    enabled = false
+    enabled = false,
   },
   statusline = {
-    theme = "minimal"
-  }
+    theme = "minimal",
+  },
 }
 M.plugins = "custom.plugins"
 
+M.general = {
+  n = {
+    ["<C-h>"] = { "<cmd>TmuxNavigateLeft<CR>", "window left" },
+    ["<C-l>"] = { "<cmd>TmuxNavigateRight<CR>", "window right" },
+    ["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
+    ["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up" },
+  },
+}
 M.lazy_nvim = {
   performance = {
     rtp = {
@@ -47,8 +54,8 @@ M.lazy_nvim = {
         "bugreport",
         "ftplugin",
         "editorconfig",
-      }
-    }
-  }
+      },
+    },
+  },
 }
 return M
